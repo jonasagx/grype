@@ -10,8 +10,6 @@ release:
 builds:
   - binary: grype
     id: grype
-    env:
-      - CGO_ENABLED=0
     goos:
       - linux
       - windows
@@ -33,8 +31,6 @@ builds:
   # For more info on this macOS build, see: https://github.com/mitchellh/gon#usage-with-goreleaser
   - binary: grype
     id: grype-macos
-    env:
-      - CGO_ENABLED=0
     goos:
       - darwin
     goarch:

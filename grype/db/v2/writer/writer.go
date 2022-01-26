@@ -8,7 +8,7 @@ import (
 	"github.com/anchore/grype/grype/db/v2/model"
 	"github.com/anchore/grype/internal"
 	"github.com/go-test/deep"
-	"github.com/jinzhu/gorm"
+	"gorm.io/gorm"
 
 	// provide the sqlite dialect to gorm via import
 	_ "github.com/jinzhu/gorm/dialects/sqlite"

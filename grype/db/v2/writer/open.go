@@ -4,7 +4,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/jinzhu/gorm"
+	"github.com/glebarez/sqlite"
+	"gorm.io/gorm"
 )
 
 var connectStatements = []string{
@@ -40,12 +41,12 @@ func open(cfg config) (*gorm.DB, error) {
 		return nil, err
 	}
 
-	dbObj, err := gorm.Open("sqlite3", connStr)
+	dbObj, err := gorm.Open(sqlite.Open(connStr), &gorm.Config{
+		//Logger: &logAdapter{},
+	})
 	if err != nil {
 		return nil, fmt.Errorf("unable to connect to DB: %w", err)
 	}
-
-	dbObj.SetLogger(&logAdapter{})
 
 	for _, sqlStmt := range connectStatements {
 		dbObj.Exec(sqlStmt)
