@@ -37,7 +37,6 @@ func TestTablePresenter(t *testing.T) {
 	}
 
 	var match1 = match.Match{
-
 		Vulnerability: vulnerability.Vulnerability{
 			ID:        "CVE-1999-0001",
 			Namespace: "source-1",
@@ -52,7 +51,6 @@ func TestTablePresenter(t *testing.T) {
 	}
 
 	var match2 = match.Match{
-
 		Vulnerability: vulnerability.Vulnerability{
 			ID:        "CVE-1999-0002",
 			Namespace: "source-2",
@@ -74,9 +72,43 @@ func TestTablePresenter(t *testing.T) {
 		},
 	}
 
+	var match3 = match.Match{
+		Vulnerability: vulnerability.Vulnerability{
+			ID:        "CVE-1999-0003",
+			Namespace: "source-2",
+		},
+		Package: pkg2,
+		Details: []match.Detail{
+			{
+				Type:    match.ExactIndirectMatch,
+				Matcher: match.DpkgMatcher,
+				SearchedBy: map[string]interface{}{
+					"some": "key",
+				},
+			},
+		},
+	}
+
+	var match4 = match.Match{
+		Vulnerability: vulnerability.Vulnerability{
+			ID:        "CVE-1999-0003",
+			Namespace: "source-1",
+		},
+		Package: pkg2,
+		Details: []match.Detail{
+			{
+				Type:    match.ExactIndirectMatch,
+				Matcher: match.DpkgMatcher,
+				SearchedBy: map[string]interface{}{
+					"some": "key",
+				},
+			},
+		},
+	}
+
 	matches := match.NewMatches()
 
-	matches.Add(match1, match2)
+	matches.Add(match1, match2, match3, match4)
 
 	packages := []pkg.Package{pkg1, pkg2}
 

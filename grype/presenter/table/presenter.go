@@ -35,7 +35,7 @@ func (pres *Presenter) Present(output io.Writer) error {
 	rows := make([][]string, 0)
 
 	columns := []string{"Name", "Installed", "Fixed-In", "Type", "Vulnerability", "Severity"}
-	for m := range pres.results.Enumerate() {
+	for _, m := range pres.results.Sorted() {
 		var severity string
 
 		metadata, err := pres.metadataProvider.GetMetadata(m.Vulnerability.ID, m.Vulnerability.Namespace)
